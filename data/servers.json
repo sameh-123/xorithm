@@ -1,0 +1,83 @@
+[
+  {
+    "id": "1",
+    "name": "Authentication Server",
+    "ip": "192.168.1.10",
+    "status": "Up",
+    "responseTime": "120ms",
+    "uptime": "99.98%",
+    "lastChecked": "2025-05-17",
+    "history": [
+      { "timestamp": "2025-05-17", "status": "Up" },
+      { "timestamp": "2025-05-16", "status": "Up" },
+      { "timestamp": "2025-05-15", "status": "Up" },
+      { "timestamp": "2025-05-14", "status": "Degraded" },
+      { "timestamp": "2025-05-13", "status": "Degraded" },
+      { "timestamp": "2025-05-12", "status": "Up" },
+      { "timestamp": "2025-05-11", "status": "Up" },
+      { "timestamp": "2025-05-10", "status": "Down" },
+      { "timestamp": "2025-05-09", "status": "Up" },
+      { "timestamp": "2025-05-08", "status": "Degraded" }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Payment Gateway",
+    "ip": "192.168.1.11",
+    "status": "Degraded",
+    "responseTime": "450ms",
+    "uptime": "97.12%",
+    "lastChecked": "2025-05-17",
+    "history": [
+      { "timestamp": "2025-05-17", "status": "Degraded" },
+      { "timestamp": "2025-05-16", "status": "Degraded" },
+      { "timestamp": "2025-05-15", "status": "Down" },
+      { "timestamp": "2025-05-14", "status": "Down" }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Database Server",
+    "ip": "192.168.1.12",
+    "status": "Down",
+    "responseTime": "N/A",
+    "uptime": "92.87%",
+    "lastChecked": "2025-05-17",
+    "history": [
+      { "timestamp": "2025-05-17", "status": "Down" },
+      { "timestamp": "2025-05-16", "status": "Down" },
+      { "timestamp": "2025-05-15", "status": "Down" },
+      { "timestamp": "2025-05-14", "status": "Degraded" }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Notification Service",
+    "ip": "192.168.1.13",
+    "status": "Up",
+    "responseTime": "110ms",
+    "uptime": "99.99%",
+    "lastChecked": "2025-05-17",
+    "history": [
+      { "timestamp": "2025-05-17", "status": "Up" },
+      { "timestamp": "2025-05-16", "status": "Up" },
+      { "timestamp": "2025-05-15", "status": "Up" },
+      { "timestamp": "2025-05-14", "status": "Up" }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Analytics Engine",
+    "ip": "192.168.1.14",
+    "status": "Up",
+    "responseTime": "135ms",
+    "uptime": "98.65%",
+    "lastChecked": "2025-05-17",
+    "history": [
+      { "timestamp": "2025-05-17", "status": "Up" },
+      { "timestamp": "2025-05-16", "status": "Up" },
+      { "timestamp": "2025-05-15", "status": "Degraded" },
+      { "timestamp": "2025-05-14", "status": "Up" }
+    ]
+  }
+]

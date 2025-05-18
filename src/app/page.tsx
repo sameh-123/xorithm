@@ -1,6 +1,6 @@
 import FilteringAndSorting from '@/components/home/filter-sort';
 import Servers from '@/components/home/servers';
-import { getData } from '@/lib/actions';
+import { getServers } from '@/lib/fetch-servers';
 import filterAndSort from '@/lib/filter-sort';
 import { Server } from '@/lib/types';
 
@@ -14,11 +14,8 @@ export default async function Home({
   }>;
 }) {
   const options = await searchParams;
-  const servers: Server[] = await getData({ url: '/api/servers' });
+  const servers: Server[] = (await getServers()) || [];
   const filtered = filterAndSort(servers, options);
-
-  
-
   return (
     <main className="container my-10">
       <FilteringAndSorting />

@@ -1,4 +1,3 @@
-import { getData } from '@/lib/actions';
 import { Server } from '@/lib/types';
 import {
   Tooltip,
@@ -6,13 +5,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { getServers } from '@/lib/fetch-servers';
 export default async function ServerDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const servers: Server[] = await getData({ url: '/api/servers' });
+  const servers: Server[] = await getServers();
   const server = servers.find((item) => item.id === id);
   if (!server)
     return (

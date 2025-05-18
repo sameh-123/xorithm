@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -17,9 +16,10 @@ import {
 
 import { Input } from '@/components/ui/input';
 import { LoaderCircle } from 'lucide-react';
-import { signIn } from 'next-auth/react';
-import { postData, setToken } from '@/lib/actions';
+import { getData, setToken } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
+import { User } from '@/lib/types';
+import { errorToast } from '../shared/custom-toast';
 
 type Name = 'email' | 'password';
 
@@ -41,20 +41,22 @@ export default function LoginForm() {
   });
 
   async function onSubmit(values: any) {
-    const data = await postData({ url: '/api/login', data: values });
-    if (data.error) {
-      toast('Error', {
-        description: data.error || 'something went wrong',
-        style: {
-          backgroundColor: 'red',
-          fontSize: '20px',
-          color: 'white',
-          border: '0',
-          fontWeight: 'bold',
-        },
-      });
+    const { email, password } = values;
+    const users: User[] | undefined = await getData({ url: 'users' });
+    if (!users) {
+      errorToast('Error', 'something went wrong');
+      return;
     }
-    await setToken(data.user.id);
+    const user = users.find((u) => u.email == email);
+    if (!user) {
+      errorToast('Error', 'no such user exists');
+      return;
+    }
+    if (user.password != password) {
+      errorToast('Error', 'incorrect password');
+      return;
+    }
+    await setToken(user.id);
     router.push('/');
   }
   const fields: {

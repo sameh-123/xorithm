@@ -1,15 +1,13 @@
 import Image from 'next/image';
 import LogoutButton from './logout-button';
-import { getToken } from '@/lib/actions';
-import { readUsers } from '@/lib/read-write-json';
+import { getData, getToken } from '@/lib/actions';
 import { User } from '@/lib/types';
 import Link from 'next/link';
 
 export default async function Header() {
   const token = await getToken();
   if (!token) return null;
-  const users = await readUsers();
-  const user: User = users.find((u: User) => u.id === token);
+  const user: User = await getData({ url: `users/${token}` });
   return (
     <header className="bg-black text-white flex items-center justify-between sm:p-10 p-5">
       <Link href="/">

@@ -38,3 +38,30 @@ export const sortSelect = [
     label: 'DESC Up Time',
   },
 ];
+
+export const fields: {
+  label: string;
+  name: 'email' | 'password' | 'confirm' | 'name';
+  type: 'text' | 'password';
+}[] = [
+  {
+    name: 'name',
+    label: 'Name',
+    type: 'text',
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'text',
+  },
+  {
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+  },
+  {
+    name: 'confirm',
+    label: 'confirm password',
+    type: 'password',
+  },
+];

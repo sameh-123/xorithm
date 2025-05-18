@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -19,8 +18,8 @@ import { Input } from '@/components/ui/input';
 import { LoaderCircle } from 'lucide-react';
 import { postData } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
-type Name = 'email' | 'password' | 'confirm' | 'name';
-
+import { errorToast, successToast } from '../shared/custom-toast';
+import { fields } from '@/lib/constants';
 const formSchema = z
   .object({
     name: z.string().min(3),
@@ -50,58 +49,15 @@ export default function SignUpForm() {
   });
 
   async function onSubmit(values: any) {
-    const data = await postData({ url: '/api/register', data: values });
-    if (data.error) {
-      toast('Error', {
-        description: data.error || 'something went wrong',
-        style: {
-          backgroundColor: 'red',
-          fontSize: '20px',
-          color: 'white',
-          border: '0',
-          fontWeight: 'bold',
-        },
-      });
+    delete values.confirm;
+    const data = await postData({ url: '/users', data: values });
+    if (!data) {
+      errorToast('Error', 'something went wrong');
     } else {
-      toast('Done', {
-        description: 'user created successfuly',
-        style: {
-          backgroundColor: 'green',
-          fontSize: '20px',
-          color: 'white',
-          border: '0',
-          fontWeight: 'bold',
-        },
-      });
+      successToast('Done', 'user created successfuly');
       router.push('/login');
     }
   }
-  const fields: {
-    label: string;
-    name: Name;
-    type: 'text' | 'password';
-  }[] = [
-    {
-      name: 'name',
-      label: 'Name',
-      type: 'text',
-    },
-    {
-      name: 'email',
-      label: 'Email',
-      type: 'text',
-    },
-    {
-      name: 'password',
-      label: 'Password',
-      type: 'password',
-    },
-    {
-      name: 'confirm',
-      label: 'confirm password',
-      type: 'password',
-    },
-  ];
 
   return (
     <Form {...form}>
@@ -113,7 +69,7 @@ export default function SignUpForm() {
           <FormField
             key={itm.name}
             control={form.control}
-            name={itm.name as Name}
+            name={itm.name}
             render={({ field }) => (
               <FormItem className="col-span-1 relative">
                 <FormLabel className="text-xl">{itm.label}</FormLabel>
